@@ -1,0 +1,60 @@
+{% extends 'index.html' %}
+
+{% block body %}
+    <div class="col-lg-12">
+   <div class="col-md-2">
+
+   </div>
+<div class="col-md-8" style="padding-top: 4%;">
+<div class="card" style="background: #fff; border-radius: 10px; padding: 20px;">
+    <a href="../" class="btn btn-primary" style="float: right;"><i class="glyphicon glyphicon-plus"></i> NEW REQUEST</a><br><br>
+<table class="table table-bordered table-striped table-hover table-responsive">
+    <tr>
+        <th>&numero;</th>
+        <th>NAME</th>
+        <th>REQUESTS</th>
+
+    </tr>
+    {% for client in clients %}
+    <tr>
+        <td>{{ client.id }}</td>
+        <td><span class="btn btn-primary btn-block">{{ client.name }}</span></td>
+        <td>
+        <table class="table table-bordered table-striped table-hover table-responsive">
+            <tr>
+                <th>REF</th>
+                <th>PRODUCT AREA</th>
+                <th>TITLE</th>
+                <th>DESCRIPTION</th>
+                <th>TARGET DATE</th>
+                <th>PRIORITY</th>
+            </tr>
+            {% for req in client.requests %}
+                <tr>
+                    <td>{{ req.rid }}</td>
+                    {% for area in areas %}
+                            {% if area.id == req.product %}
+                    <td><span class="btn btn-primary btn-block">{{ area.name }}</span></td>
+                        {% endif %}
+                        {% endfor %}
+                    <td>{{ req.title }}</td>
+                    <td>{{ req.description }}</td>
+                    <td>{{ req.target_date }}</td>
+                    <td>{{ req.priority }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+
+            </td>
+
+    </tr>
+{% endfor %}
+</table>
+
+</div>
+</div>
+<div class="col-md-2">
+
+   </div>
+</div>
+{% endblock %}

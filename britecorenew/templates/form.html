@@ -1,0 +1,82 @@
+{% extends 'index.html' %}
+
+
+{% block body %}
+    <div class="col-lg-12">
+   <div class="col-md-3">
+
+   </div>
+<div class="col-md-6" style="padding-top: 4%;">
+<div class="card" style="background: #fff; border-radius: 10px; padding: 20px;">
+    <div id="formz">
+    <div class="form-group">
+        <div class="card" style="padding: 10px;">
+        <label>TITLE</label>
+    <input class="form-control" id="title" type="text" placeholder="Title">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="card" style="padding: 10px;">
+        <label>DESCRIPTION</label>
+        <textarea class="form-control" id="description" placeholder="Description" rows="5" cols="50" style="resize: none;"></textarea>
+        </div>
+    </div>
+    <div class="card" style="padding: 10px;">
+    <div class="row">
+    <div class="form-group col-md-4">
+        <label>CLIENT</label>
+    <select class="form-control" id="client">
+        <option value="">---SELECT---</option>
+{#        make sure client list is dynamic#}
+        {% for x in clients %}
+            <option value="{{ x.id }}">{{ x.name }}</option>
+        {% endfor %}
+    </select>
+    </div>
+        <div class="form-group col-md-4">
+        <label>PRODUCT AREA</label>
+    <select class="form-control" id="product_area">
+        <option value="">---SELECT---</option>
+    {#        make sure product areas are dynamic#}
+{% for k in areas %}
+            <option value="{{ k.id }}">{{ k.name }}</option>
+        {% endfor %}
+
+    </select>
+    </div>
+        <div class="form-group col-md-4">
+        <label>TARGET DATE</label>
+        <input type="date" class="form-control" id="target_date" >
+    </div>
+    </div>
+</div>
+    <div class="form-group">
+        <div class="card" style="padding: 10px;">
+        <label>PRIORITY LEVEL</label>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-2"><span id="star1" onmouseover="level('1')" onclick="select_level('1')" onmouseleave="lv('1')" class="glyphicon glyphicon-star-empty" style="color: #122b40; font-size: 200%;"></span></div>
+            <div class="col-md-2"><span id="star2" onmouseover="level('2')" onclick="select_level('2')" onmouseleave="lv('2')" class="glyphicon glyphicon-star-empty" style="color: #122b40; font-size: 200%;"></span></div>
+            <div class="col-md-2"><span id="star3" onmouseover="level('3')" onclick="select_level('3')" onmouseleave="lv('3')" class="glyphicon glyphicon-star-empty" style="color: #122b40; font-size: 200%;"></span></div>
+            <div class="col-md-2"><span id="star4" onmouseover="level('4')" onclick="select_level('4')" onmouseleave="lv('4')" class="glyphicon glyphicon-star-empty" style="color: #122b40; font-size: 200%;"></span></div>
+            <div class="col-md-2"><span id="star5" onmouseover="level('5')" onclick="select_level('5')" onmouseleave="lv('5')" class="glyphicon glyphicon-star-empty" style="color: #122b40; font-size: 200%;"></span></div>
+            <div class="col-md-1"></div>
+        </div>
+        </div>
+    </div>
+    <div>
+       <center>
+           <span id="submit-bt" onclick="submit()" class="btn btn-default btn-lg">SUBMIT</span>
+           <br>
+           <a href="/requests" style="color: #122b40; font-weight: bold; font-size: 90%; cursor: pointer;">Existing Feature Requests >>></a>
+       </center>
+    </div>
+</div>
+   </div>
+
+</div>
+<div class="col-md-3">
+
+   </div>
+</div>
+{% endblock %}
