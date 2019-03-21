@@ -1,4 +1,4 @@
-from britecorenew import db
+from britecore import db
 import enum
 from datetime import datetime
 

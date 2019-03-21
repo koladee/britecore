@@ -1,7 +1,7 @@
 from flask import render_template, request
-from britecorenew import app, db
-from britecorenew.quiz import quiz
-from britecorenew import models
+from britecore import app, db
+from britecore.quiz import quiz
+from britecore import models
 import string
 import random
 from sqlalchemy import func
