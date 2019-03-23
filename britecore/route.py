@@ -11,7 +11,7 @@ def process_request(ob):
     title = ob['title']
     description = ob['description']
     client = ob['client']
-    product_area = ob'product_area']
+    product_area = ob['product_area']
     target_date = ob['target_date']
     priority = ob['level']
     if title and description and client and product_area and target_date and priority is not None:
