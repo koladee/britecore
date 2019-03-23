@@ -27,7 +27,6 @@ class Bucketlist(unittest.TestCase):
 
         # binds the app to the current context
         with self.app.app_context():
-            # create all database tables
             db.create_all()
 
     def test_create_client_and_request(self):
