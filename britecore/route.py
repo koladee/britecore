@@ -10,7 +10,6 @@ from sqlalchemy import SQLAlchemyError
 
 @app.route('/')
 def index():
-    quiz()
     clients = models.Client.query.all()
     areas = models.Productarea.query.all()
     return render_template('form.html', clients=clients, areas=areas)
