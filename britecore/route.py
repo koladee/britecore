@@ -1,10 +1,11 @@
-from flask import render_template, request
+from flask import render_template, request, flash
 from britecore import app, db
 from britecore.quiz import quiz
 from britecore import models
 import string
 import random
 from sqlalchemy import func
+from sqlalchemy import SQLAlchemyError
 
 
 @app.route('/')
@@ -32,6 +33,8 @@ def new_request():
         product_area = request.form['product_area']
         target_date = request.form['target_date']
         priority = request.form['level']
+        pt = request.form.get('title')
+        print(pt)
         if title and description and client and product_area and target_date and priority is not None:
             exist = models.Requests.query.filter(
                 models.Requests.priority >= priority,
@@ -53,8 +56,13 @@ def new_request():
                                   product=product_area, target_date=target_date, priority=priority)
             exist.append(req)
             db.session.add_all(exist)
-            db.session.commit()
-            return "The feature request was submitted successfully"
+            try:
+                db.session.commit()
+            except SQLAlchemyError as e:
+                reason = str(e)
+                flash(reason)
+            if priority is not None:
+                return "The feature request was submitted successfully"
         else:
             return 'Oops!!! All fields are required.'
     else:
