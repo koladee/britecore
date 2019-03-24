@@ -36,7 +36,7 @@ class Bucketlist(unittest.TestCase):
             description=f'The breakdown of request goes here {index+1}',
             client_id=1,
             product=1,    
-            target_date=date(2019,03,23),
+            target_date=date(2019,10,23),
             priority=4
          ) for index, product in Productarea]
         data.append(client)
