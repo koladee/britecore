@@ -9,7 +9,7 @@ from britecore import app, db
 class Bucketlist(unittest.TestCase):
     """bucketlist test case"""
 
-    def settings(self):
+    def setUp(self):
         self.app = app
         self.app.config['TESTING'] = True
         self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'test.db')
@@ -77,7 +77,7 @@ class Bucketlist(unittest.TestCase):
         res = self.client().post('/request/new', data=self.request)
         self.assertEqual(Requests.query.get(1).priority, 1)
         self.assertEqual(Requests.query.get(2).priority, 2)
-        self.assertEqual(Request.query.get(3).priority, 3)
+        self.assertEqual(Requests.query.get(3).priority, 3)
         self.assertEqual(Requests.query.get(4).priority, 5)
         self.assertEqual(Requests.query.get(5).priority, 4)
         self.assertEqual(Requests.query.count(), 5)
@@ -98,7 +98,7 @@ class Bucketlist(unittest.TestCase):
         self.assertEqual(res.status_code, 302)
 
 
-    def destroy_db(self):
+    def tearDown(self):
         with self.app.app_context():
             db.session.remove()
             db.drop_all()
