@@ -1,6 +1,5 @@
 from flask import render_template, request, flash
 from britecore import app, db
-from britecore.quiz import quiz
 from britecore import models
 import string
 import random
