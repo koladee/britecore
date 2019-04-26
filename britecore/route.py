@@ -19,25 +19,27 @@ def process_request(ob):
             models.Requests.priority >= priority,
             models.Requests.client_id == client).all()
         for each in exist:
-            if each.priority is not priority:
-                each.priority = each.priority
-            else:
+            if int(priority) == int(each.priority):
                 prior = db.session.query(func.max(models.Requests.priority)). \
                     filter(models.Requests.client_id == client).all()
                 each.priority = int(prior[0][0]) + 1
+            else:
+                print(each.priority)
+                each.priority = each.priority
 
         rand = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(10)])
         req = models.Requests(rid=rand, title=title, description=description, client_id=client,
                               product=product_area, target_date=target_date, priority=priority)
         exist.append(req)
         db.session.add_all(exist)
+        done = False
         try:
             db.session.commit()
+            done = True
         except SQLAlchemyError as e:
             reason = str(e)
             flash(reason)
-        if priority is not None:
-            return "The feature request was submitted successfully"
+        return done
     else:
         return 'Oops!!! All fields are required.'
 
@@ -60,6 +62,10 @@ def requests():
 def new_request():
     if request.method == 'POST':
         forms = request.form
-        process_request(forms)
+        done = process_request(forms)
+        if done is True:
+            return "The feature request was submitted successfully"
+        else:
+            return "Oops! An error occurred while trying to process your request."
     else:
         return 'Oops!!! Something went wrong', 'error'
