@@ -4,7 +4,8 @@ from britecore import models
 import string
 import random
 from sqlalchemy import func
-from sqlalchemy import SQLAlchemyError
+from sqlalchemy.exc import SQLAlchemyError
+
 
 def process_request(ob):
     title = ob['title']
@@ -18,17 +19,13 @@ def process_request(ob):
             models.Requests.priority >= priority,
             models.Requests.client_id == client).all()
         for each in exist:
-            each.priority = each.priority + 1
-        prior = db.session.query(func.max(models.Requests.priority)).\
-            filter(models.Requests.client_id == client).all()
-        print(prior[0][0])
+            if each.priority is not priority:
+                each.priority = each.priority
+            else:
+                prior = db.session.query(func.max(models.Requests.priority)). \
+                    filter(models.Requests.client_id == client).all()
+                each.priority = int(prior[0][0]) + 1
 
-        if prior[0][0] is not None:
-            if int(priority) <= int(prior[0][0]):
-                priority = int(prior[0][0]) + 1
-        else:
-            priority = priority
-        print(priority)
         rand = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(10)])
         req = models.Requests(rid=rand, title=title, description=description, client_id=client,
                               product=product_area, target_date=target_date, priority=priority)
