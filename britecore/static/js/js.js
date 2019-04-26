@@ -6,16 +6,16 @@ function submit(){
     var client = $("#client").val();
     var product_area = $("#product_area").val();
     var target_date = $("#target_date").val();
-    var level = $("#star").val();
+    var level = $("#priority").val();
     if(title !== ""){
         if(description !== ""){
             if(client !== ""){
                 if(product_area !== ""){
                     if(target_date !== ""){
-                        if(level !== ""){
                         if(level > 0){
                             $.post('/request/new', {title:title, description:description, client:client,
                                 product_area:product_area, target_date:target_date, level:level}, function (data) {
+                                alert(data);
                                 $("#submit-bt").html('SUBMIT');
                                 if(data === "The feature request was submitted successfully"){
                                     Lobibox.notify('success', {
@@ -23,13 +23,12 @@ function submit(){
                                         hideClass: 'fadeOut',
                                         msg: data
                                     });
-                                    lv(1);
                                     $("#title").val('');
                                     $("#description").val('');
                                     $("#client").val('');
                                     $("#product_area").val('');
                                     $("#target_date").val('');
-                                    star = ""
+                                    $("#priority").val("")
                                 }else{
                                     Lobibox.notify('error', {
                                         showClass: 'fadeIn',
@@ -44,13 +43,6 @@ function submit(){
                                 showClass: 'fadeIn',
                                 hideClass: 'fadeOut',
                                 msg: "The Priority Level must be greater than zero."
-                            });
-                        }
-                            $("#submit-bt").html('SUBMIT');
-                            Lobibox.notify('error', {
-                                showClass: 'fadeIn',
-                                hideClass: 'fadeOut',
-                                msg: "The Priority Level must be specified."
                             });
                         }
                     }else{
