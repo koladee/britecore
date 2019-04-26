@@ -54,13 +54,9 @@
         <div class="card" style="padding: 10px;">
         <label>PRIORITY LEVEL</label>
         <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-2"><span id="star1" onmouseover="level('1')" onclick="select_level('1')" onmouseleave="lv('1')" class="glyphicon glyphicon-star-empty" style="color: #122b40; font-size: 200%;"></span></div>
-            <div class="col-md-2"><span id="star2" onmouseover="level('2')" onclick="select_level('2')" onmouseleave="lv('2')" class="glyphicon glyphicon-star-empty" style="color: #122b40; font-size: 200%;"></span></div>
-            <div class="col-md-2"><span id="star3" onmouseover="level('3')" onclick="select_level('3')" onmouseleave="lv('3')" class="glyphicon glyphicon-star-empty" style="color: #122b40; font-size: 200%;"></span></div>
-            <div class="col-md-2"><span id="star4" onmouseover="level('4')" onclick="select_level('4')" onmouseleave="lv('4')" class="glyphicon glyphicon-star-empty" style="color: #122b40; font-size: 200%;"></span></div>
-            <div class="col-md-2"><span id="star5" onmouseover="level('5')" onclick="select_level('5')" onmouseleave="lv('5')" class="glyphicon glyphicon-star-empty" style="color: #122b40; font-size: 200%;"></span></div>
-            <div class="col-md-1"></div>
+            <div class="col-md-4 form-group">
+                <input onchange="nth()" id="star" type="number" class="form-control" placeholder="n > 5">
+            </div>
         </div>
         </div>
     </div>
