@@ -7,9 +7,9 @@ A "feature request" is a request for a new feature sent by a user and it will be
 
 
 ## Approach to Problem Statement
-When a new feature request is submitted by a particular client, based on the problem statement that "all the priorities of all other feature requests for that same client should be reordered", the priorities are reorderd by adding 1 to their existing priorities.
-Then for the priority of the new request not to be the same with that of the existing requests, i sort for the request with the highest priority value, i picked this value and added 1 to it and set it to be the value of the new request to be added to the database.
-In a case where there are no requests in the request table, i set the value of the priority for the new request to be that specified by the user, being the first entry into the table.
+When a new feature request is submitted by a particular client, based on the problem statement that "all the priorities of all other feature requests for that same client should be reordered", the priorities are reorderd by adding 1 to heighest value of priority to replace that of the existing priority that is equal to the newly submitted priority.
+Then for the priority of the new request takes its original value.
+With this, no priority is repeated.
 
 
 ## How to get Started
